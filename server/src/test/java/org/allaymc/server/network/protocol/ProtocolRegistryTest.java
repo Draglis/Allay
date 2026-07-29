@@ -7,6 +7,7 @@ import org.allaymc.server.network.protocol.v766.PacketEncoder_v766;
 import org.allaymc.server.network.protocol.v766.Protocol_v766_NetEase;
 import org.allaymc.server.network.protocol.v819.Protocol_v819;
 import org.allaymc.server.network.protocol.v819.Protocol_v819_NetEase;
+import org.allaymc.server.network.protocol.v860.Protocol_v860_NetEase;
 import org.allaymc.testutils.AllayTestExtension;
 import org.cloudburstmc.protocol.bedrock.codec.BedrockCodec;
 import org.cloudburstmc.protocol.bedrock.codec.v818.Bedrock_v818;
@@ -37,11 +38,12 @@ class ProtocolRegistryTest {
         assertInstanceOf(Protocol_v766_NetEase.class, registry.resolve(ClientVariant.NETEASE, 766));
         assertInstanceOf(Protocol_v819.class, registry.resolve(ClientVariant.INTERNATIONAL, 819));
         assertInstanceOf(Protocol_v819_NetEase.class, registry.resolve(ClientVariant.NETEASE, 819));
+        assertInstanceOf(Protocol_v860_NetEase.class, registry.resolve(ClientVariant.NETEASE, 860));
         assertNull(registry.resolve(ClientVariant.NETEASE, 818));
         assertEquals(818, registry.getLowest(ClientVariant.INTERNATIONAL).getProtocolVersion());
         assertEquals(1001, registry.getLatest(ClientVariant.INTERNATIONAL).getProtocolVersion());
         assertEquals(766, registry.getLowest(ClientVariant.NETEASE).getProtocolVersion());
-        assertEquals(819, registry.getLatest(ClientVariant.NETEASE).getProtocolVersion());
+        assertEquals(860, registry.getLatest(ClientVariant.NETEASE).getProtocolVersion());
     }
 
     @Test

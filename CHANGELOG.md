@@ -8,9 +8,22 @@ Each release is associated with a specific API version, and any changes to API w
 
 Unless otherwise specified, any version comparison below is the comparison of the server version, not the API version.
 
-# 0.14.0 (API 0.29.0) - Unreleased
+# 0.14.1 (API 0.30.0) - Unreleased
 
-<small>[Compare with 0.13.0](https://github.com/AllayMC/Allay/compare/0.13.0...HEAD)</small>
+<small>[Compare with 0.14.0](https://github.com/AllayMC/Allay/compare/0.14.0...HEAD)</small>
+
+### Added
+
+- Added support for NetEase protocol v860 (Minecraft 1.21.124).
+- Introduced new multi version architecture (mvv2).
+
+### Fixed
+
+- Tipped arrow with infinity now can be picked up.
+
+# 0.14.0 (API 0.29.0) - 2026/7/22
+
+<small>[Compare with 0.13.0](https://github.com/AllayMC/Allay/compare/0.13.0...0.14.0)</small>
 
 ### Added
 

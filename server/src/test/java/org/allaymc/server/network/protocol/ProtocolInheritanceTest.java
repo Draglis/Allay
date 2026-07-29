@@ -19,7 +19,9 @@ import org.allaymc.server.network.protocol.v844.Protocol_v844;
 import org.allaymc.server.network.protocol.v859.PacketEncoder_v859;
 import org.allaymc.server.network.protocol.v859.Protocol_v859;
 import org.allaymc.server.network.protocol.v860.PacketEncoder_v860;
+import org.allaymc.server.network.protocol.v860.PacketEncoder_v860_NetEase;
 import org.allaymc.server.network.protocol.v860.Protocol_v860;
+import org.allaymc.server.network.protocol.v860.Protocol_v860_NetEase;
 import org.allaymc.server.network.protocol.v898.PacketEncoder_v898;
 import org.allaymc.server.network.protocol.v898.Protocol_v898;
 import org.allaymc.server.network.protocol.v924.PacketEncoder_v924;
@@ -28,12 +30,14 @@ import org.allaymc.server.network.protocol.v944.PacketEncoder_v944;
 import org.allaymc.server.network.protocol.v944.Protocol_v944;
 import org.allaymc.server.network.protocol.v975.PacketEncoder_v975;
 import org.allaymc.server.network.protocol.v975.Protocol_v975;
+import org.cloudburstmc.protocol.bedrock.codec.v860_netease.Bedrock_v860_NetEase;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Modifier;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ProtocolInheritanceTest {
@@ -84,6 +88,8 @@ class ProtocolInheritanceTest {
         assertEquals(PacketEncoder_v766.class, PacketEncoder_v766_NetEase.class.getSuperclass());
         assertEquals(Protocol_v819.class, Protocol_v819_NetEase.class.getSuperclass());
         assertEquals(PacketEncoder_v819.class, PacketEncoder_v819_NetEase.class.getSuperclass());
+        assertEquals(Protocol_v860.class, Protocol_v860_NetEase.class.getSuperclass());
+        assertEquals(PacketEncoder_v860.class, PacketEncoder_v860_NetEase.class.getSuperclass());
     }
 
     @Test
@@ -111,10 +117,14 @@ class ProtocolInheritanceTest {
 
         var netEaseV766 = new Protocol_v766_NetEase();
         var netEaseV819 = new Protocol_v819_NetEase();
+        var netEaseV860 = new Protocol_v860_NetEase();
         assertEquals(ClientVariant.NETEASE, netEaseV766.getVariant());
         assertEquals(766, netEaseV766.getProtocolVersion());
         assertEquals(ClientVariant.NETEASE, netEaseV819.getVariant());
         assertEquals(819, netEaseV819.getProtocolVersion());
+        assertEquals(ClientVariant.NETEASE, netEaseV860.getVariant());
+        assertEquals(860, netEaseV860.getProtocolVersion());
+        assertSame(Bedrock_v860_NetEase.CODEC, netEaseV860.getCodec());
     }
 
     private static void assertDirectChain(List<Class<?>> chain) {

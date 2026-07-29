@@ -292,6 +292,19 @@ class PacketEncoderCompatibilityTest {
     }
 
     @Test
+    void netEaseV860ContainerOpenUsesTargetCodec() {
+        var protocol = protocol(ClientVariant.NETEASE, 860);
+        var packet = protocol.getEncoder().encodeContainerOpen(
+                new BaseContainer(ContainerTypes.CHEST),
+                (byte) 7,
+                new org.joml.Vector3i(1, 65, 2)
+        );
+
+        assertFalse(packet.isIgnoreBlock());
+        assertPacketEncodes(protocol, packet);
+    }
+
+    @Test
     void levelChunkPacketsOwnIndependentBuffers() {
         var protocol = protocol(ClientVariant.INTERNATIONAL, 1001);
         var chunk = AllayUnsafeChunk.builder()
@@ -509,7 +522,8 @@ class PacketEncoderCompatibilityTest {
 
         for (var protocol : List.of(
                 protocol(ClientVariant.NETEASE, 766),
-                protocol(ClientVariant.NETEASE, 819)
+                protocol(ClientVariant.NETEASE, 819),
+                protocol(ClientVariant.NETEASE, 860)
         )) {
             var first = protocol.getEncoder().encodeSkinConfirmation(player, skin).iterator().next();
             var second = protocol.getEncoder().encodeSkinConfirmation(player, skin).iterator().next();
